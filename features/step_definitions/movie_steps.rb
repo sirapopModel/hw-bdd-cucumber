@@ -20,11 +20,12 @@ end
 
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
+  data = page.body
+  expect(data.index(e1) < data.index(e2)).to be true
   #  page.body is the entire content of the page as a string.
-  pending "Fill in this step in movie_steps.rb"
+  #  pending "Fill in this step in movie_steps.rb"
   
 end
-
 # Make it easier to express checking or unchecking several boxes at once
 #  "When I uncheck the following ratings: PG, G, R"
 #  "When I check the following ratings: G"
@@ -46,11 +47,17 @@ end
 # Part 2, Step 3
 Then /^I should (not )?see the following movies: (.*)$/ do |no, movie|
   movie_list = movie.split(",")
+  #print(movie_list.class)
   # Take a look at web_steps.rb Then /^(?:|I )should see "([^"]*)"$/
   if !no
-    movie_list.each {|x| %Q{I should see "#{x}"}}
+    print(movie_list)
+    for i in movie_list do 
+      steps %Q{Then I should see "#{i}"}
+    end
   else
-    movie_list.each {|x| %Q{I should not see "#{x}"}}
+    for i in movie_list do 
+      steps %Q{Then I should not see "#{i}"}
+    end
   end
   #pending "Fill in this step in movie_steps.rb"
 end
@@ -58,7 +65,7 @@ end
 Then /I should see all the movies/ do
   # Make sure that all the movies in the app are visible in the table
   title_list = Movie.select(:title)
-  title_list.each {|x| %Q{I should see "#{x}"}}
+  title_list.each {|x| %Q{Then I should see "#{x}"}}
   #pending "Fill in this step in movie_steps.rb"
 end
 
