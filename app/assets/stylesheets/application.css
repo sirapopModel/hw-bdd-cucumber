@@ -13,3 +13,31 @@
  *= require_tree .
  *= require_self
  */
+ .profile-picture {
+  width:  90px;
+  height: 80px;
+  margin: 10px;
+}
+ .Account_Container{
+    position: relative;
+    Width: 100px;
+    left: 90%;
+ }
+  .red-button {
+    background-color: #FF5733; /* Change to your desired color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Adjust padding for spacing */
+    border: none; /* Remove the default button border */
+    border-radius: 5px; /* Round the corners */
+    cursor: pointer; /* Add a pointer cursor on hover */
+  }
+  .green-button {
+    background-color: #5caa00; /* Change to your desired color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Adjust padding for spacing */
+    border: none; /* Remove the default button border */
+    border-radius: 5px; /* Round the corners */
+    cursor: pointer; /* Add a pointer cursor on hover */
+    
+  }
+  
