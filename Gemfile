@@ -3,14 +3,10 @@ source 'https://rubygems.org'
 ruby '2.6.6'
 gem 'rails', '4.2.11'
 
-gem 'dotenv-rails',groups: [:development,:test]
-gem 'omniauth'
-gem 'omniauth-rails_csrf_protection'
+
 gem 'sass-rails', '~> 5.0.3'
 gem 'uglifier', '>= 2.7.1'
-gem 'omniauth-facebook'
 
-gem 'themoviedb' 
 gem 'jquery-rails'
 
 gem 'reek'
@@ -23,6 +19,7 @@ end
 group :development, :test do
   gem 'byebug'
   gem 'database_cleaner'
+  gem 'cucumber-rails', require: false
   gem 'rspec-rails'
 
   gem 'pry'
