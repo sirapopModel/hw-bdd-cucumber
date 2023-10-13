@@ -12,3 +12,11 @@ Feature: User can add movie by searching for it in The Movie Database (TMDb)
         Then I should be on the RottenPotatoes home page
         And I should see "'Movie That Does Not Exist' was not found in TMDb."
 
+    Scenario: Try to add existing movie (happy path)
+        Given I am on the RottenPotatoes home page
+        Then I should see "Search TMDb for a movie"
+        When I fill in "Search Terms" with "Inception"
+        And I press "Search TMDb"
+        Then I should be on the Create New Movie page
+        And I should not see "not found"
+        And the "Title" field should contain "Inception"

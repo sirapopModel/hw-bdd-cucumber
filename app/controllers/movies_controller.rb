@@ -1,5 +1,8 @@
 class MoviesController < ApplicationController
   before_action :force_index_redirect, only: [:index]
+  Tmdb::Api.key(ENV["TMDB_API_KEY"])
+  
+
   def show
     id = params[:id] # retrieve movie ID from URI route
     @movie = Movie.find(id) # look up movie by unique ID
@@ -7,7 +10,7 @@ class MoviesController < ApplicationController
   end
 
   def index      
-    @all_ratings = Movie.all_ratings
+    #@all_ratings = Movie.all_ratings
     @movies = Movie.with_ratings(ratings_list, sort_by)
     @ratings_to_show_hash = ratings_hash
     @sort_by = sort_by
@@ -19,8 +22,14 @@ class MoviesController < ApplicationController
   def new
     # default: render 'new' template
     # if access by search name from tdmb do
-    @title_name = params[:title]
-    @release_date = params[:release_date].split("-")
+    if params[:movie]
+      @movie = Movie.new(movie_params)
+    end
+    #title_name = params[:title]
+    #@release_date = params[:release_date].split("-")
+    #@release_date = params[:release_date]
+    #, default: {day: @release_date[2],month: @release_date[1],year: @release_date[0]}
+    #, :value =>@title_name
     #byebug
   end
 
@@ -52,22 +61,26 @@ class MoviesController < ApplicationController
     #get parameter from search form by tag :movie :title
     movie_name = params[:movie][:title]
     #Search movie by name
-    Tmdb::Api.key(ENV["TMDB_API_KEY"])
-    Tmdb::Api.language("de")
     @movie = Tmdb::Movie.find(movie_name)
+    #Checking Search Found
     if @movie != []
-      @movie = @movie[0]
-      redirect_to new_movie_path(
-        title: @movie.original_title,
-        release_date: @movie.release_date
-        )
+      redirect_found_tmdb(@movie)
     else
       flash[:notice] = "'#{movie_name}' was not found in TMDb."
       redirect_to movies_path
     end
+    
   end
 
+  
   private
+  
+  def redirect_found_tmdb(movie)
+    @movie = movie[0]
+    redirect_to new_movie_path(
+        movie: {title: @movie.original_title, release_date: @movie.release_date}
+        )
+  end
 
   def force_index_redirect
     if !params.key?(:ratings) || !params.key?(:sort_by)

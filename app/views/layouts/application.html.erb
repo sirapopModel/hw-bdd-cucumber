@@ -13,15 +13,16 @@
     <nav class="navbar navbar-expand-lg bg-primary text-white mb-3">
       <h1 class="title">Rotten Potatoes!</h1>
     </nav>
-    <div class="Account_Container">
-    <% if !set_current_user %>
 
-<%= link_to 'Log in', login_path, class: 'green-button',method: 'post' %>
-<% else %>
-  <img src="<%= session[:user_pic] %>" alt="User Profile Picture" class="profile-picture">
-  <%= link_to 'Log out', logout_path, class: 'red-button',method: 'post' %>
-  <% end %>
-  </div>
+    <div class="Account_Container">
+
+      <% if !set_current_user %>
+        <%= link_to 'Log in', login_path, class: 'green-button',method: 'post' %>
+      <% else %>
+        <img src="<%= session[:user_pic] %>" alt="User Profile Picture" class="profile-picture">
+        <%= link_to 'Log out', logout_path, class: 'red-button',method: 'post' %>
+      <% end %>
+    </div>
 
     <div class="container">
       <%# Render "flash" messages in our application. This loads _flash.erb %>

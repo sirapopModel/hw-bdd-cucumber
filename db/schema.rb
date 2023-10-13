@@ -30,4 +30,10 @@ ActiveRecord::Schema.define(version: 20230925053325) do
     t.datetime "updated_at"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.text     "detail"
+    t.string   "created_by"
+    t.datetime "updated_at"
+  end
+
 end

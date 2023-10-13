@@ -17,8 +17,17 @@
   <%= @movie.description %>
 </p>
 
+  <div class="form-group">
+  <h3>Write a Review:</h3>
+  <textarea class="form-control"></textarea>
+  <%= link_to 'Add Review', movies_path, class: 'btn btn-success' %>
+</div>
 <div class="row">
   <%= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-primary col-2' %>
   <%= link_to 'Delete', movie_path(@movie), 'data-method': 'delete', 'data-confirm': 'Are you sure?', class: 'btn btn-danger col-2' %>
   <%= link_to 'Back to movie list', movies_path, class: 'btn btn-primary col-2' %>
+</div>
+<div class="form-group">
+  <h3>Reviews</h3>
+  
 </div>

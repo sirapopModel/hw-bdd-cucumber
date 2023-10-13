@@ -9,5 +9,3 @@ Rottenpotatoes::Application.routes.draw do
   get 'auth/facebook', :as => 'login'
   post 'logout' => 'sessions#destroy'
 end
-
-
